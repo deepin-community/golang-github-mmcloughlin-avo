@@ -1,15 +1,41 @@
-Source: template-repository
-Section: unknown
+Source: golang-github-mmcloughlin-avo
+Maintainer: Debian Go Packaging Team <team+pkg-go@tracker.debian.org>
+Uploaders:
+ Roger Shimizu <rosh@debian.org>,
+Section: golang
+Testsuite: autopkgtest-pkg-go
 Priority: optional
-Maintainer: Tsic404 <liuheng@deepin.org>
-Build-Depends: debhelper (>= 11)
-Standards-Version: 4.1.3
-Homepage: https://github.com/deepin-community/template-repository
-#Vcs-Browser: https://salsa.debian.org/debian/deepin-community-template-repository
-#Vcs-Git: https://salsa.debian.org/debian/deepin-community-template-repository.git
+Build-Depends:
+ debhelper-compat (= 13),
+ dh-golang,
+ golang-any,
+ golang-golang-x-arch-dev,
+ golang-golang-x-sys-dev,
+ golang-golang-x-tools-dev,
+Standards-Version: 4.6.2
+Vcs-Browser: https://salsa.debian.org/go-team/packages/golang-github-mmcloughlin-avo
+Vcs-Git: https://salsa.debian.org/go-team/packages/golang-github-mmcloughlin-avo.git
+Homepage: https://github.com/mmcloughlin/avo
+Rules-Requires-Root: no
+XS-Go-Import-Path: github.com/mmcloughlin/avo
 
-Package: template-repository
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Package: golang-github-mmcloughlin-avo-dev
+Architecture: all
+Multi-Arch: foreign
+Depends:
+ golang-golang-x-arch-dev,
+ golang-golang-x-tools-dev,
+ ${misc:Depends},
+Description: Generate x86 Assembly with Go (library)
+ This is the library package of avo.
+ .
+ avo makes high-performance Go assembly easier to write, review and
+ maintain. The avo package presents a familiar assembly-like interface
+ that simplifies development without sacrificing performance:
+ + Use Go control structures for assembly generation; avo programs
+   are Go programs
+ + Register allocation: write functions with virtual registers and avo
+   assigns physical registers for you
+ + Automatically load arguments and store return values: ensure memory
+   offsets are correct for complex structures
+ + Generation of stub files to interface with your Go package

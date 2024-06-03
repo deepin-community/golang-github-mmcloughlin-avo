@@ -1,4 +1,34 @@
 #!/usr/bin/make -f
 
+include /usr/share/dpkg/pkg-info.mk
+
+export DH_GOLANG_INSTALL_EXTRA := \
+	internal/cmd/docgen/templates \
+	internal/data \
+	tests/thirdparty/suite.json
+
+export DH_GOLANG_EXCLUDES := \
+	examples \
+	internal/cmd
+
+ifeq ($(filter $(DEB_HOST_ARCH), amd64),)
+export DH_GOLANG_EXCLUDES += tests
+endif
+
 %:
-	dh $@
+	dh $@ --buildsystem=golang --with=golang --builddirectory=_build
+
+override_dh_auto_configure:
+	dh_auto_configure
+	# dh-golang doesn't play well with symlinks
+	find _build/src/github.com/mmcloughlin/avo/ -name testdata -type l -delete -print
+	cp -avT ./internal/data _build/src/github.com/mmcloughlin/avo/internal/load/testdata
+	cp -avT ./internal/data _build/src/github.com/mmcloughlin/avo/internal/opcodescsv/testdata
+
+# autopktest-pkg-go integration runs "debian/rules build", which is a no-op due
+# to a script "build" present in the upstream source. This (PHONY) target
+# overrides this.
+build:
+	dh build --buildsystem=golang --with=golang --builddirectory=_build
+
+.PHONY: build
