@@ -1,0 +1,22 @@
+From: Shengjing Zhu <zhsj@debian.org>
+Date: Wed, 8 Feb 2023 18:22:28 +0800
+Subject: Skip undeclared name test in TestParseSignatureErrors
+
+Bug: https://github.com/mmcloughlin/avo/issues/367
+---
+ gotypes/signature_test.go | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gotypes/signature_test.go b/gotypes/signature_test.go
+index 03f8e9b..9194c8e 100644
+--- a/gotypes/signature_test.go
++++ b/gotypes/signature_test.go
+@@ -121,7 +121,7 @@ func TestParseSignatureErrors(t *testing.T) {
+ 		Expr          string
+ 		ErrorContains string
+ 	}{
+-		{"idkjklol", "undeclared name"},
++		//{"idkjklol", "undeclared name"}, https://github.com/mmcloughlin/avo/issues/367
+ 		{"struct{}", "not a function signature"},
+ 		{"uint32(0xfeedbeef)", "should have nil value"},
+ 	}

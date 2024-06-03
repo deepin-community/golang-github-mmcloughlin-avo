@@ -1,5 +1,63 @@
-template-repository (1.0-1) unstable; urgency=medium
+golang-github-mmcloughlin-avo (0.5.0-1) unstable; urgency=medium
 
-  * Initial release
+  * Team upload
+  * New upstream version 0.5.0
+  * Track upstream tags in uscan watch file
+  * Update section to golang
+  * Update Standards-Version to 4.6.2 (no changes)
+  * Add Multi-Arch
+  * Add golang-golang-x-sys-dev to Build-Depends
+  * Simplify d/rules
+  * Exclude all internal commands
+  * Fix autopktest not running
+  * Add patch to skip undeclared name test in TestParseSignatureErrors
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- Shengjing Zhu <zhsj@debian.org>  Wed, 08 Feb 2023 16:56:29 +0800
+
+golang-github-mmcloughlin-avo (0.0~git20200523.4439b6b-6) unstable; urgency=medium
+
+  * debian/patches:
+    - Disable two failed tests to let buildd "all" to work.
+
+ -- Roger Shimizu <rosh@debian.org>  Tue, 28 Jul 2020 19:22:40 +0900
+
+golang-github-mmcloughlin-avo (0.0~git20200523.4439b6b-5) unstable; urgency=medium
+
+  * debian/rules:
+    - Make the proper symbolic link of test data.
+  * debian/patches:
+    - Enable two tests because the test data becomes available, and can
+      be passed now.
+    - Disable two failed tests, and log the upstream ticket.
+
+ -- Roger Shimizu <rosh@debian.org>  Tue, 28 Jul 2020 02:13:56 +0900
+
+golang-github-mmcloughlin-avo (0.0~git20200523.4439b6b-4) unstable; urgency=medium
+
+  * debian/patches:
+    - Disable TestAssembles go test to see the results in buildd.
+      This hopefully can fix the FTBFS on non-amd64 64-bit systems.
+      Unfortunately, 32-bit architectures will still fails due to:
+        # github.com/mmcloughlin/avo/internal/gen
+        internal/gen/asmtest.go:118:24: constant 9223372036854775807 overflows int
+
+ -- Roger Shimizu <rosh@debian.org>  Mon, 27 Jul 2020 01:35:59 +0900
+
+golang-github-mmcloughlin-avo (0.0~git20200523.4439b6b-3) unstable; urgency=medium
+
+  * debian/rules:
+    - Avoid building some examples and tests on non-amd64 architectures.
+
+ -- Roger Shimizu <rosh@debian.org>  Mon, 27 Jul 2020 00:37:26 +0900
+
+golang-github-mmcloughlin-avo (0.0~git20200523.4439b6b-2) unstable; urgency=medium
+
+  * Source only upload.
+
+ -- Roger Shimizu <rosh@debian.org>  Sat, 25 Jul 2020 20:01:05 +0900
+
+golang-github-mmcloughlin-avo (0.0~git20200523.4439b6b-1) unstable; urgency=medium
+
+  * Initial release (Closes: #965065)
+
+ -- Roger Shimizu <rosh@debian.org>  Wed, 15 Jul 2020 23:44:32 +0900
